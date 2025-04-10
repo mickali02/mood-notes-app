@@ -1,0 +1,41 @@
+<!-- ui/html/pages/home.tmpl -->
+{{define "title"}}Home - Feel Flow{{end}}
+
+{{define "main"}}
+<div class="home-header">
+    <img src="/static/img/logo.png" alt="Feel Flow Logo" class="logo">
+     <p class="intro-paragraph">
+        Feel Flow is your personal mood-tracking app for emotional awareness and self-care.
+        Record daily moods, reflect on patterns, and gain insights into your well-being.
+        Stay in tune with yourself—one emotion at a time.
+    </p>
+</div>
+
+
+{{if .Notes}}
+    <!-- Search Bar (Appears only if notes exist) -->
+    <div class="search-bar-container">
+        <form action="/" method="GET"> <!-- Adjust action/method if search implemented differently -->
+            <input type="search" name="query" placeholder="Search notes by title or date..." class="search-input">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+    </div>
+
+    <!-- Notes List -->
+    <div class="notes-list">
+        <h2>Your Entries</h2>
+        {{range .Notes}}
+            <!-- Include the note item partial using its new name -->
+            <!-- The '.' passes the current note data from the range loop to the partial -->
+            {{template "note_item.tmpl" .}}
+        {{end}}
+    </div>
+{{else}}
+    <!-- Initial State Message -->
+    <div class="initial-message">
+        <h2>Get started on your healing journey</h2>
+        <a href="/note/new" class="btn btn-primary">Add New Entry</a>
+    </div>
+{{end}}
+
+{{end}}

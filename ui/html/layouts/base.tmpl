@@ -1,0 +1,46 @@
+<!-- ui/html/layouts/base.tmpl -->
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{block "title" .}}Feel Flow Mood Notes{{end}}</title>
+    <!-- Link CSS - Corrected Path -->
+    <link rel="stylesheet" href="/static/styles.css"> <!-- CHANGED path -->
+    <!-- Add Google Fonts or other font links here -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Navigation Sidebar -->
+        <nav class="left-nav">
+            {{block "nav" .}}{{template "nav.tmpl" .}}{{end}}
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Flash Messages (Implement later) -->
+            {{with .Flash}}
+            <div class="flash-message success">{{.}}</div>
+            {{end}}
+
+            <!-- Page Specific Content -->
+            {{block "main" .}}
+            <!-- Default content if block not defined -->
+            {{end}}
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+             {{block "sidebar" .}}{{template "right_sidebar.tmpl" .}}{{end}}
+        </aside>
+    </div>
+
+    <!-- Add JS links here if needed later -->
+    <!-- <script src="/static/js/main.js"></script> -->
+</body>
+</html>
+{{end}}

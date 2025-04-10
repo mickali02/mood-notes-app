@@ -1,0 +1,24 @@
+<!-- ui/html/partials/note_item.tmpl -->
+{{define "note_item.tmpl"}}
+<article class="note-item">
+    <header class="note-item-header">
+        <!-- Access fields from the note passed in via '.' -->
+        <h3>{{.Title}}</h3>
+        <time datetime="{{.CreatedAt.Format "2006-01-02T15:04:05Z"}}">{{humanDate .CreatedAt}}</time>
+    </header>
+    <div class="note-item-content">
+        <!-- Display limited content, maybe first N characters or lines -->
+        <!-- Note: Go templates don't have a built-in slice function like printf "%.200s" directly -->
+        <!-- For simple truncation, you might need a custom template function or just show full content -->
+        <!-- Showing full content for now: -->
+        <p>{{.Content}}</p>
+        <!-- If you really need truncation, we'd add a function to templates.go -->
+    </div>
+    <footer class="note-item-actions">
+        <a href="/note/edit/{{.ID}}" class="btn btn-secondary">Edit</a>
+        <form action="/note/delete/{{.ID}}" method="POST" style="display: inline;">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</button>
+        </form>
+    </footer>
+</article>
+{{end}}
